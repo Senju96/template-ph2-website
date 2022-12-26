@@ -28,12 +28,17 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     environment:
       - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=root
       - MYSQL_DATABASE=posse
+      - MYSQL_PASSWORD=root
     ports:
       - 3306:3306
     volumes: # mysqlのテーブルやらなんやらを保存する
       - mysql-data:/var/lib/mysql
       - ./docker/mysql:/docker-entrypoint-initdb.d
+    image: mysql:8.0
+    platform: linux/x86_64
+
   # PHPMyAdminサーバー
   phpmyadmin: # デフォルトのままで不都合ないのでDockerHubにあるイメージをそのまま使う
     image: phpmyadmin/phpmyadmin:latest
